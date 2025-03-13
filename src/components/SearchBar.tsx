@@ -22,16 +22,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     setLoading(true);
     try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/geo/1.0/direct`,
-        {
-          params: {
-            q: searchQuery,
-            limit: 10,
-            appid: "19bda7ae4043499144b85493916dae95",
-          },
-        }
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL_CITY}`, {
+        params: {
+          q: searchQuery,
+          limit: 10,
+          appid: `${import.meta.env.VITE_API_KEY_CITY}`,
+        },
+      });
 
       const cityResults = response.data.map((city: any, index: number) => ({
         id: `${city.lat}-${city.lon}-${index}`,
